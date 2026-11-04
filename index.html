@@ -17,6 +17,9 @@
   </head>
   <body>
     <header>
+      <canvas id="logo" width="120" height="120">
+        Ashenafi Gebremedhin logo
+      </canvas>
       <h1>Ashenafi Gebremedhin</h1>
       <img
         src="images/profile.jpg"
@@ -222,6 +225,11 @@
           <label for="lvl-cpp">C++</label>
           <meter id="lvl-cpp" value="0.95" min="0" max="1">95%</meter>
         </p>
+        <h3>My Skill Chart</h3>
+
+        <canvas id="skillChart" width="300" height="150">
+          Chart showing my skill levels
+        </canvas>
         <h3>My Learning Roadmap</h3>
         <ol type="1">
           <li>HTML structure and content</li>
@@ -469,7 +477,7 @@
             <legend>Project Details</legend>
             <label for="phone">Phone(optional):</label>
             <input
-              type="text"
+              type="tel"
               id="phone"
               name="phone"
               pattern="0[79][0-9]{8}"
@@ -578,5 +586,58 @@
         <time datetime="2026-11-05">5 November 2026</time>
       </p>
     </footer>
+    <script>
+      const canvas = document.getElementById("logo");
+      const ctx = canvas.getContext("2d");
+
+      // 1. Draw the blue square background
+      ctx.fillStyle = "#1f5fa8";
+      ctx.fillRect(0, 0, 120, 120);
+
+      // 2. Draw the white circle
+      ctx.beginPath();
+      ctx.arc(60, 60, 45, 0, 2 * Math.PI);
+      ctx.fillStyle = "white";
+      ctx.fill();
+
+      // 3. Draw your initials
+      ctx.fillStyle = "#1f5fa8";
+      ctx.font = "bold 36px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("AG", 60, 62);
+
+      // Get the skill chart canvas
+      const chart = document.getElementById("skillChart");
+      const chartCtx = chart.getContext("2d");
+
+      // Skill values in percentages
+      const skills = [
+        { name: "HTML", value: 80 },
+        { name: "Python", value: 90 },
+        { name: "JavaScript", value: 50 },
+        { name: "C++", value: 95 },
+      ];
+
+      // Draw the bars
+      chartCtx.fillStyle = "#1f5fa8";
+
+      skills.forEach((skill, index) => {
+        const barHeight = skill.value * 1.2;
+        const x = 20 + index * 70;
+        const y = 130 - barHeight;
+
+        chartCtx.fillRect(x, y, 35, barHeight);
+
+        // Draw skill name
+        chartCtx.fillStyle = "black";
+        chartCtx.font = "12px Arial";
+        chartCtx.textAlign = "center";
+        chartCtx.fillText(skill.name, x + 17, 145);
+
+        // Restore bar color for the next skill
+        chartCtx.fillStyle = "#1f5fa8";
+      });
+    </script>
   </body>
 </html>
